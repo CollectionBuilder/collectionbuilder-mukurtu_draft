@@ -85,7 +85,7 @@ function makeCard(obj) {
   /* add items */
   var items = [
     {% for i in items %}
-    { "title":{{ i.title | strip | escape | jsonify }}, "format":{% if i.format %}{{ i.format | escape | jsonify }}{% else %}""{% endif %}, {% for f in fields %}{% if i[f.field] %}{{ f.field | escape | jsonify }}:{{ i[f.field] | strip | jsonify }},{% endif %}{% endfor %} "filename": {{ i.mediasource | jsonify }}, {% if i.small_image %}"small_image": {{ i.small_image | jsonify }}, {% endif %}"id":{{ i.objectid | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}
+    { "title":{{ i.title | strip | escape | jsonify }}, "format":{% if i.format %}{{ i.format | escape | jsonify }}{% else %}""{% endif %}, {% for f in fields %}{% if i[f.field] %}{{ f.field | escape | jsonify }}:{{ i[f.field] | strip_html | strip | jsonify }},{% endif %}{% endfor %} "filename": {{ i.mediasource | jsonify }}, {% if i.small_image %}"small_image": {{ i.small_image | jsonify }}, {% endif %}"id":{{ i.objectid | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}
   ];
   /* randomize items once at page load */
   shuffle(items);
